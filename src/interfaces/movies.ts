@@ -29,7 +29,7 @@ interface ICollection {
   backdrop_path: string;
 }
 
-interface IGanre {
+export interface IGanre {
   id: number;
   name: string;
 }

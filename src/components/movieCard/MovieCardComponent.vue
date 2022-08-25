@@ -15,30 +15,61 @@
     <!-- informations -->
     <div class="flex flex-col justify-between h-full w-full">
       <p class="font-[700] px-[1.063rem] pt-[1rem]">
-        {{ movie.title }}
+        {{ movie?.title }}
       </p>
       <div>
+        <!-- release date -->
         <div
           class="px-[1.063rem] text-[0.75rem] text-[#4E4E4E] flex gap-[0.43rem] pb-[14px]"
         >
-          <img src="/icons/i_calender.png" :alt="movie.release_date" />
+          <img src="/icons/i_calender.png" :alt="movie?.release_date" />
           <p>
-            {{ movie.release_date }}
+            {{ movie?.release_date }}
           </p>
         </div>
-        <p class="px-[1.063rem] pb-[1.75rem]">{{ movie.title }}</p>
+        <!-- genres -->
+        <div class="px-[1.063rem] pb-[1.75rem] flex flex-wrap items-center">
+          <div
+            v-for="(genre, i) in getGenres"
+            :key="i"
+            class="flex items-center text-[12px] text-[#505050]"
+          >
+            {{ genre.name }}
+            <i
+              class="fa fa-circle fa-sm mx-2 text-[4px]"
+              aria-hidden="true"
+              v-if="getGenres?.length !== i + 1"
+            ></i>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 import { IMAGE_URL } from "@/statics";
+import { IGenres, IMovie, IGanre } from "@/interfaces/movies";
 
 export default defineComponent({
   name: "MovieCardComponent",
-  props: ["movie"],
+  props: {
+    movie: {
+      type: Object as PropType<IMovie>,
+    },
+    genres: {
+      type: Object as PropType<IGenres>,
+    },
+  },
+  computed: {
+    getGenres(): IGanre[] | undefined {
+      const movieGenres = this.genres?.genres?.filter((genre) =>
+        this.movie?.genre_ids.includes(genre.id)
+      );
+      return movieGenres;
+    },
+  },
   data() {
     return {
       IMAGE_URL,
