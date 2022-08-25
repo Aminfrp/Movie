@@ -10,3 +10,12 @@
 body{
     font-family: "roboto";
 }
+
+.dp__input_icon{
+    display: none !important;
+}
+.dp__input{
+    padding: 4px !important;
+    border-radius:0px !important;
+    width: 221px !important;
+}

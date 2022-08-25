@@ -7,10 +7,12 @@
       class="md:ml-[5.063rem] sm:ml-2 sm:my-5 md:flex md:items-center sm:flex sm:p-3"
     >
       <p class="mr-[1.813rem]">Search by release date:</p>
-      <div
-        class="h-[2.063rem] bg-[#FFFFFF] w-[13.813rem]"
-        style="border: 1px solid #cfcfcf"
-      ></div>
+      <DatePicker
+        v-model="date"
+        range
+        multiCalendars
+        :enableTimePicker="false"
+      ></DatePicker>
     </div>
     <!-- search button -->
     <ButtonComponent title="Search" width="[10px]" @handleClick="handleClick" />
@@ -25,6 +27,11 @@ export default defineComponent({
   name: "SearchBoxComponent",
   components: {
     ButtonComponent,
+  },
+  data() {
+    return {
+      date: null,
+    };
   },
   methods: {
     handleClick: () => {

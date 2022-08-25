@@ -9,6 +9,7 @@
       <MovieCardComponent :movie="movie" :genres="genres" />
     </div>
   </div>
+  <!-- pagination -->
   <PaginationComponent
     @handleNextPage="nextPage"
     @handlePrevPage="previusPage"
