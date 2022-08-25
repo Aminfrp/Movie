@@ -1,9 +1,12 @@
 <template>
-  <!-- header -->
-  <HeaderComponent />
-  <!-- page container -->
-  <div class="mt-[70px]">
-    <router-view />
+  <!-- application base pages -->
+  <div class="h-screen">
+    <!-- header -->
+    <HeaderComponent />
+    <!-- page container -->
+    <div class="md:mt-[4.375rem] sm:mt-2 md:px-[13rem] sm:px-[1rem] h-full">
+      <router-view />
+    </div>
   </div>
 </template>
 

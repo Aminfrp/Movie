@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[#11B980] h-[48px] w-full"></div>
+  <div class="bg-[#11B980] h-[3rem] w-full"></div>
 </template>
 
 <script lang="ts">
