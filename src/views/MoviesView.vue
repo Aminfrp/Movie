@@ -1,6 +1,6 @@
 <template>
   <!-- movies filter -->
-  <SearchBoxComponent />
+  <SearchBoxComponent @filterMovies="filterMovies" @resetFilter="resetFilter" />
   <!-- movies cards -->
   <div
     class="w-full md:mt-[7.438rem] grid md:grid-cols-3 sm:grid-cols-1 md:gap-x-[4.188rem] md:gap-y-[2.375rem] sm:gap-[2.375rem] sm:my-10"
@@ -40,13 +40,14 @@ export default defineComponent({
       genres: {} as IGenres,
       page: 1 as number,
       total: 20 as number,
+      releaseDates: null as null | string[],
     };
   },
   methods: {
     // get fetch  all movies
-    async getMovies(page = 1 as number) {
+    async getMovies(page = 1 as number, releaseDate = null as string[] | null) {
       try {
-        const response = await movieAxios.fetchMovies(page);
+        const response = await movieAxios.fetchMovies(page, releaseDate);
         this.movies = response.data;
       } catch (error) {
         console.log(error);
@@ -73,6 +74,20 @@ export default defineComponent({
       this.page -= 1;
       this.total -= 20;
     },
+    // filter Movies
+    filterMovies(dates: Date[] | null) {
+      if (dates) {
+        const releaseDate = dates.map((date) => date.toISOString());
+        this.releaseDates = releaseDate;
+        this.getMovies(this.page, releaseDate);
+      }
+    },
+    resetFilter() {
+      this.releaseDates = null;
+      this.page = 1;
+      this.total = 20;
+      this.getMovies(1, null);
+    },
   },
   async created() {
     await this.getMovies();
@@ -80,7 +95,7 @@ export default defineComponent({
   },
   watch: {
     page(currentPage) {
-      this.getMovies(currentPage);
+      this.getMovies(currentPage, this.releaseDates);
     },
   },
 });

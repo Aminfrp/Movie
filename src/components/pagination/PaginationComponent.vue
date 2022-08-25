@@ -17,7 +17,7 @@
           page === movies?.total_pages || page === 500
             ? 'text-[#0000007A]'
             : 'text-[#318FE7]',
-          'text-[#318FE7] hover:cursor-pointer text-[700]',
+          'hover:cursor-pointer text-[700]',
         ]"
         @click="$emit('handleNextPage')"
       >

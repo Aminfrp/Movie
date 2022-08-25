@@ -4,13 +4,14 @@
   >
     <!-- filter date -->
     <div
-      class="md:ml-[5.063rem] sm:ml-2 sm:my-5 md:flex md:items-center sm:flex sm:p-3"
+      class="md:ml-[5.063rem] sm:ml-2 sm:my-5 sm:items-center md:flex md:items-center sm:flex sm:p-3"
     >
       <p class="mr-[1.813rem]">Search by release date:</p>
       <DatePicker
         v-model="date"
         range
         multiCalendars
+        @cleared="resetFilter"
         :enableTimePicker="false"
       ></DatePicker>
     </div>
@@ -30,12 +31,16 @@ export default defineComponent({
   },
   data() {
     return {
-      date: null,
+      date: null as null | Date[],
     };
   },
   methods: {
-    handleClick: () => {
-      console.log("click");
+    handleClick() {
+      this.$emit("filterMovies", this.date);
+    },
+    resetFilter() {
+      this.date = null;
+      this.$emit("resetFilter");
     },
   },
 });
