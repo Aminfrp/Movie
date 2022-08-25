@@ -9,12 +9,14 @@
       <MovieCardComponent :movie="movie" :genres="genres" />
     </div>
   </div>
+  <PaginationComponent />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import SearchBoxComponent from "@/components/searchbox/SearchBoxComponent.vue";
 import MovieCardComponent from "@/components//movieCard/MovieCardComponent.vue";
+import PaginationComponent from "@/components//pagination/PaginationComponent.vue";
 import movieAxios from "@/axios/movieAxios";
 import { IGenres, IMovies } from "@/interfaces/movies";
 
@@ -23,6 +25,7 @@ export default defineComponent({
   components: {
     SearchBoxComponent,
     MovieCardComponent,
+    PaginationComponent,
   },
   data() {
     return {
