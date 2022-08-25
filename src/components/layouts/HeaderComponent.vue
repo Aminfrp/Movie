@@ -1,5 +1,5 @@
 <template>
-  <div>Header</div>
+  <div class="bg-[#11B980] h-[48px] w-full"></div>
 </template>
 
 <script lang="ts">

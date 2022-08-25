@@ -1,8 +1,10 @@
 <template>
+  <!-- header -->
   <HeaderComponent />
-  <router-link to="/">Home</router-link>
-  <router-link to="/about">About</router-link>
-  <router-view />
+  <!-- page container -->
+  <div class="mt-[70px]">
+    <router-view />
+  </div>
 </template>
 
 <script lang="ts">
