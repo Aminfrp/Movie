@@ -8,7 +8,8 @@ const instance = axios.create({
 });
 
 const api = {
-  fetchMovies: () => instance.get<IMovies>("/discover/movie"),
+  fetchMovies: (page = 1 as number) =>
+    instance.get<IMovies>("/discover/movie", { params: { page: page } }),
   fetchGenres: () => instance.get<IGenres>("genre/movie/list"),
 };
 

@@ -7,8 +7,8 @@
     <!-- poster -->
     <div class="pl-[3px] my-[3px]">
       <img
-        :src="IMAGE_URL + movie.poster_path"
-        :alt="movie.title"
+        :src="IMAGE_URL + movie?.poster_path"
+        :alt="movie?.title"
         class="w-[12rem] rounded-l-[0.375rem] h-[11.8rem]"
       />
     </div>

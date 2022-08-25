@@ -9,7 +9,13 @@
       <MovieCardComponent :movie="movie" :genres="genres" />
     </div>
   </div>
-  <PaginationComponent />
+  <PaginationComponent
+    @handleNextPage="nextPage"
+    @handlePrevPage="previusPage"
+    :page="page"
+    :total="total"
+    :movies="movies"
+  />
 </template>
 
 <script lang="ts">
@@ -31,13 +37,15 @@ export default defineComponent({
     return {
       movies: {} as IMovies,
       genres: {} as IGenres,
+      page: 1 as number,
+      total: 20 as number,
     };
   },
   methods: {
     // get fetch  all movies
-    async getMovies() {
+    async getMovies(page = 1 as number) {
       try {
-        const response = await movieAxios.fetchMovies();
+        const response = await movieAxios.fetchMovies(page);
         this.movies = response.data;
       } catch (error) {
         console.log(error);
@@ -52,10 +60,27 @@ export default defineComponent({
         console.log(error);
       }
     },
+    // handel next page
+    nextPage() {
+      if (this.page === this.movies.total_pages || this.page === 500) return;
+      this.page += 1;
+      this.total += 20;
+    },
+    // handle previus page
+    previusPage() {
+      if (this.page === 1) return;
+      this.page -= 1;
+      this.total -= 20;
+    },
   },
   async created() {
     await this.getMovies();
     this.getGenres();
+  },
+  watch: {
+    page(currentPage) {
+      this.getMovies(currentPage);
+    },
   },
 });
 </script>
