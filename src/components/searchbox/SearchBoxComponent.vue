@@ -19,6 +19,7 @@
     <ButtonComponent
       title="Search"
       width="4.625rem"
+      :icon="false"
       @handleClick="handleClick"
     />
   </div>

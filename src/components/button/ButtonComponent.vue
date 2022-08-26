@@ -4,6 +4,7 @@
     :style="`transition: ease 0.5s;width:${width}`"
     @click="$emit('handleClick')"
   >
+    <img src="/icons/i_back.png" class="pr-[0.4rem]" alt="back" v-show="icon" />
     {{ title }}
   </div>
 </template>
@@ -13,6 +14,6 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "ButtonComponent",
-  props: ["width", "title"],
+  props: ["width", "title", "icon"],
 });
 </script>

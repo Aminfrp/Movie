@@ -7,11 +7,14 @@
       <ButtonComponent
         title="Back"
         width="5.75rem"
+        :icon="true"
         @handleClick="handleClick"
       />
     </div>
     <!-- movie title -->
-    <div class="md:ml-[4rem] md:flex md:flex-col md:items-start w-full">
+    <div
+      class="md:ml-[4rem] md:flex md:flex-col md:items-start w-full md:text-left sm:text-center"
+    >
       <div class="font-[700] md:text-[1.125rem] sm:text-[0.9rem]">
         {{ movie?.title }}
       </div>

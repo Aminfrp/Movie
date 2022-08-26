@@ -1,4 +1,4 @@
-import { IGenres, IMovies, ISingleMovie } from "@/interfaces/movies";
+import { ICredits, IGenres, IMovies, ISingleMovie } from "@/interfaces/movies";
 import axios from "axios";
 const instance = axios.create({
   baseURL: process.env.VUE_APP_URL,
@@ -19,6 +19,8 @@ const api = {
   fetchGenres: () => instance.get<IGenres>("genre/movie/list"),
   fetchOneMovie: (movieId: string) =>
     instance.get<ISingleMovie>(`/movie/${movieId}`),
+  fetchCredits: (movieId: string) =>
+    instance.get<ICredits>(`/movie/${movieId}/credits`),
 };
 
 export default api;

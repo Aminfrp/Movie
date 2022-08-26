@@ -12,6 +12,7 @@
     </div>
     <!-- movie info -->
     <div class="md:pl-[4.375rem] w-full sm:p-5">
+      <!-- budget -->
       <div class="flex justify-between py-[9px]">
         <p class="font-[700]">Budget</p>
         <p>
@@ -19,6 +20,7 @@
           {{ movie?.budget ? (movie?.budget as number).toLocaleString() : 0 }}
         </p>
       </div>
+      <!-- revenue -->
       <div class="flex justify-between py-[9px]">
         <p class="font-[700]">Revenue</p>
         <p>
@@ -26,10 +28,12 @@
           {{ movie?.revenue ? (movie?.revenue as number).toLocaleString() : 0 }}
         </p>
       </div>
+      <!-- release date -->
       <div class="flex justify-between py-[9px]">
         <p class="font-[700]">Release Date</p>
         <p>{{ movie?.release_date ? movie?.release_date : "_" }}</p>
       </div>
+      <!-- runtime -->
       <div class="flex justify-between py-[9px]">
         <p class="font-[700]">Runtime</p>
         <p>
@@ -38,10 +42,23 @@
           }}
         </p>
       </div>
+      <!-- score -->
       <div class="flex justify-between py-[9px]">
         <p class="font-[700]">Score</p>
-        <p>7.9 (23563 votes)</p>
+        <div class="flex items-center">
+          <star-rating
+            :rating="(movie?.vote_average as number) / 2"
+            :read-only="true"
+            :star-size="20"
+            :show-rating="false"
+            :increment="0.1"
+          ></star-rating>
+          <span class="ml-1">{{
+            `${movie?.vote_average} (${movie?.vote_count} votes)`
+          }}</span>
+        </div>
       </div>
+      <!-- genre -->
       <div class="flex justify-between py-[9px]">
         <p class="font-[700]">Genres</p>
         <p>
@@ -52,6 +69,7 @@
           </span>
         </p>
       </div>
+      <!-- imdb -->
       <div class="flex justify-between py-[9px]">
         <p class="font-[700]">IMDB Link</p>
         <a
@@ -62,6 +80,7 @@
         >
         <p v-else>_</p>
       </div>
+      <!-- home page link -->
       <div class="flex justify-between py-[9px]">
         <p class="font-[700]">Homepage Link</p>
         <a
@@ -80,9 +99,13 @@
 import { ISingleMovie } from "@/interfaces/movies";
 import { IMAGE_URL } from "@/statics";
 import { defineComponent, PropType } from "vue";
+import StarRating from "vue-star-rating";
 
 export default defineComponent({
   name: "MovieBodyComponent",
+  components: {
+    StarRating,
+  },
   props: {
     movie: {
       type: Object as PropType<ISingleMovie>,
