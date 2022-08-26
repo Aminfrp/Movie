@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import MoviesView from "../views/MoviesView.vue";
-import AboutView from "../views/AboutView.vue";
+import MovieView from "../views/MovieView.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -9,9 +9,9 @@ const routes: Array<RouteRecordRaw> = [
     component: MoviesView,
   },
   {
-    path: "/about",
-    name: "about",
-    component: AboutView,
+    path: "/:id",
+    name: "movie",
+    component: MovieView,
   },
 ];
 

@@ -3,6 +3,7 @@
   <div
     class="w-full bg-[#C4C4C4] rounded-[0.375rem] h-[12.188rem] flex items-center border border-[#C4C4C4] hover:cursor-pointer hover:scale-105 hover:drop-shadow-md"
     style="transition: ease 0.5s"
+    @click="navigateToMovie(movie?.id)"
   >
     <!-- poster -->
     <div class="pl-[3px] my-[3px]">
@@ -74,6 +75,11 @@ export default defineComponent({
     return {
       IMAGE_URL,
     };
+  },
+  methods: {
+    navigateToMovie(id: string) {
+      this.$router.push(`/${id}`);
+    },
   },
 });
 </script>
