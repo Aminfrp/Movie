@@ -1,19 +1,21 @@
 <template>
-  <div class="about">
-    <MovieHeaderComponent :movie="currentMovie" />
-    <h1>{{ currentMovie.title }}</h1>
-  </div>
+  <!-- header -->
+  <MovieHeaderComponent :movie="currentMovie" />
+  <!-- info -->
+  <MovieBodyComponent :movie="currentMovie" />
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
 import movieAxios from "@/axios/movieAxios";
 import { ISingleMovie } from "@/interfaces/movies";
-import MovieHeaderComponent from "../components/movieHeader/MovieHeaderComponent.vue";
+import MovieHeaderComponent from "../components/singleMovie/MovieHeaderComponent.vue";
+import MovieBodyComponent from "../components/singleMovie/MovieBodyComponent.vue";
 
 export default defineComponent({
   name: "MovieView",
   components: {
     MovieHeaderComponent,
+    MovieBodyComponent,
   },
   data() {
     return {
