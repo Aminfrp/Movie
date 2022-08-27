@@ -90,9 +90,11 @@ export default defineComponent({
     // filter Movies
     filterMovies(dates: Date[] | null) {
       if (dates) {
+        this.page = 1;
+        this.total = 20;
         const releaseDate = dates.map((date) => date.toISOString());
         this.releaseDates = releaseDate;
-        this.getMovies(this.page, releaseDate);
+        this.getMovies(1, releaseDate);
       }
     },
     resetFilter() {
