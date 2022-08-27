@@ -25,7 +25,7 @@
     <div class="flex flex-col justify-between h-full w-full">
       <div class="font-[700] px-[1.063rem] pt-[1rem]">
         <SkeletonComponent
-          width="15rem"
+          width="70%"
           height="1rem"
           radius="0.1rem"
           v-if="loading"
