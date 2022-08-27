@@ -16,7 +16,8 @@
     "vue-router": "^4.0.3",
     "vue-skeletor": "^1.0.4",
     "vue-star-rating": "^2.1.0",
-    "vue2-daterange-picker": "^0.6.8"
+    "vue2-daterange-picker": "^0.6.8",
+    "vue3-snackbar": "^1.1.2"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.4.0",

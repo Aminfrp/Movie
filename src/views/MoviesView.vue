@@ -53,7 +53,10 @@ export default defineComponent({
         this.movies = response.data;
         this.loading = false;
       } catch (error) {
-        console.log(error);
+        this.$snackbar.add({
+          type: "error",
+          text: error,
+        });
         this.loading = false;
       }
     },
@@ -65,7 +68,10 @@ export default defineComponent({
         this.genres = response.data;
         this.loading = false;
       } catch (error) {
-        console.log(error);
+        this.$snackbar.add({
+          type: "error",
+          text: error,
+        });
         this.loading = false;
       }
     },

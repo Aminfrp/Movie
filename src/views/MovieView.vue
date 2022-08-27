@@ -71,7 +71,10 @@ export default defineComponent({
         this.currentMovie = response.data;
         this.loading = false;
       } catch (error) {
-        alert(error);
+        this.$snackbar.add({
+          type: "error",
+          text: error,
+        });
         this.loading = false;
       }
     },
@@ -83,7 +86,10 @@ export default defineComponent({
         this.credits = response.data;
         this.loading = false;
       } catch (error) {
-        alert(error);
+        this.$snackbar.add({
+          type: "error",
+          text: error,
+        });
         this.loading = false;
       }
     },

@@ -1,4 +1,7 @@
 <template>
+  <teleport to="body">
+    <vue3-snackbar bottom center :duration="4000"></vue3-snackbar>
+  </teleport>
   <LayoutsComponent />
 </template>
 
