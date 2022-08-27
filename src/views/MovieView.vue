@@ -17,7 +17,7 @@
   </template>
   <div class="mt-[3.313rem]" v-else>{{ currentMovie.overview }}</div>
   <!-- cast members -->
-  <div class="mt-[5rem] mb-[5rem]">
+  <div class="mt-[5rem] md:mb-[5rem] sm:mb-[8rem]">
     <p class="font-[700] text-[18px] mb-[0.75rem]">Credit:</p>
     <template v-if="loading">
       <template v-for="(_, i) in Array(2)" :key="i">
