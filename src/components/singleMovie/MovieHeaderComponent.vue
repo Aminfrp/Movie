@@ -16,10 +16,26 @@
       class="md:ml-[4rem] md:flex md:flex-col md:items-start w-full md:text-left sm:text-center"
     >
       <div class="font-[700] md:text-[1.125rem] sm:text-[0.9rem]">
-        {{ movie?.title }}
+        <SkeletonComponent
+          width="15rem"
+          height="1rem"
+          radius="0.1rem"
+          v-if="loading"
+        />
+        <p v-else>
+          {{ movie?.title }}
+        </p>
       </div>
       <div class="md:text-[1.125rem] sm:text-[0.9rem]">
-        {{ movie?.tagline }}
+        <SkeletonComponent
+          width="15rem"
+          height="1rem"
+          radius="0.1rem"
+          v-if="loading"
+        />
+        <p v-else>
+          {{ movie?.tagline }}
+        </p>
       </div>
     </div>
   </div>
@@ -29,6 +45,7 @@
 import { ISingleMovie } from "@/interfaces/movies";
 import { defineComponent, PropType } from "vue";
 import ButtonComponent from "../button/ButtonComponent.vue";
+import SkeletonComponent from "@/components/Skeleton/SkeletonComponent.vue";
 
 export default defineComponent({
   name: "MovieHeaderComponent",
@@ -36,9 +53,13 @@ export default defineComponent({
     movie: {
       type: Object as PropType<ISingleMovie>,
     },
+    loading: {
+      type: Boolean,
+    },
   },
   components: {
     ButtonComponent,
+    SkeletonComponent,
   },
   methods: {
     handleClick() {

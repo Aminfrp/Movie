@@ -5,8 +5,8 @@
   <div
     class="w-full md:mt-[7.438rem] grid md:grid-cols-3 sm:grid-cols-1 md:gap-x-[4.188rem] md:gap-y-[2.375rem] sm:gap-[2.375rem] sm:my-10"
   >
-    <div v-for="(movie, i) in movies.results" :key="i">
-      <MovieCardComponent :movie="movie" :genres="genres" />
+    <div v-for="(movie, i) in movies.results || Array(20)" :key="i">
+      <MovieCardComponent :movie="movie" :genres="genres" :loading="loading" />
     </div>
   </div>
   <!-- pagination -->
@@ -41,25 +41,32 @@ export default defineComponent({
       page: 1 as number,
       total: 20 as number,
       releaseDates: null as null | string[],
+      loading: false as boolean,
     };
   },
   methods: {
     // get fetch  all movies
     async getMovies(page = 1 as number, releaseDate = null as string[] | null) {
+      this.loading = true;
       try {
         const response = await movieAxios.fetchMovies(page, releaseDate);
         this.movies = response.data;
+        this.loading = false;
       } catch (error) {
         console.log(error);
+        this.loading = false;
       }
     },
     // get fetch  all genres
     async getGenres() {
+      this.loading = true;
       try {
         const response = await movieAxios.fetchGenres();
         this.genres = response.data;
+        this.loading = false;
       } catch (error) {
         console.log(error);
+        this.loading = false;
       }
     },
     // handel next page

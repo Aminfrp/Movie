@@ -4,7 +4,15 @@
   >
     <!-- movie poster -->
     <div class="md:w-[330px] sm:w-full md:h-[495px] sm:h-full">
+      <SkeletonComponent
+        width="100%"
+        height="500px"
+        radius="12px"
+        color="#E2E2E2"
+        v-if="loading"
+      />
       <img
+        v-else
         :src="IMAGE_URL + movie?.poster_path"
         :alt="movie?.title"
         class="rounded-[12px]"
@@ -15,7 +23,14 @@
       <!-- budget -->
       <div class="flex justify-between py-[9px]">
         <p class="font-[700]">Budget</p>
-        <p>
+        <SkeletonComponent
+          width="4rem"
+          height="1rem"
+          radius="0.1rem"
+          color="#E2E2E2"
+          v-if="loading"
+        />
+        <p v-else>
           $
           {{ movie?.budget ? (movie?.budget as number).toLocaleString() : 0 }}
         </p>
@@ -23,7 +38,14 @@
       <!-- revenue -->
       <div class="flex justify-between py-[9px]">
         <p class="font-[700]">Revenue</p>
-        <p>
+        <SkeletonComponent
+          width="4rem"
+          height="1rem"
+          radius="0.1rem"
+          color="#E2E2E2"
+          v-if="loading"
+        />
+        <p v-else>
           $
           {{ movie?.revenue ? (movie?.revenue as number).toLocaleString() : 0 }}
         </p>
@@ -31,12 +53,26 @@
       <!-- release date -->
       <div class="flex justify-between py-[9px]">
         <p class="font-[700]">Release Date</p>
-        <p>{{ movie?.release_date ? movie?.release_date : "_" }}</p>
+        <SkeletonComponent
+          width="4rem"
+          height="1rem"
+          radius="0.1rem"
+          color="#E2E2E2"
+          v-if="loading"
+        />
+        <p v-else>{{ movie?.release_date ? movie?.release_date : "_" }}</p>
       </div>
       <!-- runtime -->
       <div class="flex justify-between py-[9px]">
         <p class="font-[700]">Runtime</p>
-        <p>
+        <SkeletonComponent
+          width="4rem"
+          height="1rem"
+          radius="0.1rem"
+          color="#E2E2E2"
+          v-if="loading"
+        />
+        <p v-else>
           {{
             movie?.runtime ? secondsToHms((movie?.runtime as number) * 60) : "_"
           }}
@@ -45,7 +81,14 @@
       <!-- score -->
       <div class="flex justify-between py-[9px]">
         <p class="font-[700]">Score</p>
-        <div class="flex items-center">
+        <SkeletonComponent
+          width="15rem"
+          height="1rem"
+          radius="0.1rem"
+          color="#E2E2E2"
+          v-if="loading"
+        />
+        <div class="flex items-center" v-else>
           <star-rating
             :rating="(movie?.vote_average as number) / 2"
             :read-only="true"
@@ -61,7 +104,14 @@
       <!-- genre -->
       <div class="flex justify-between py-[9px]">
         <p class="font-[700]">Genres</p>
-        <p>
+        <SkeletonComponent
+          width="10rem"
+          height="1rem"
+          radius="0.1rem"
+          color="#E2E2E2"
+          v-if="loading"
+        />
+        <p v-else>
           <span v-for="(genre, key) in movie?.genres" :key="key">
             {{
               movie?.genres.length === key + 1 ? genre.name : genre.name + " , "
@@ -72,24 +122,42 @@
       <!-- imdb -->
       <div class="flex justify-between py-[9px]">
         <p class="font-[700]">IMDB Link</p>
-        <a
-          :href="`https://www.imdb.com/title/${movie?.imdb_id}`"
-          v-if="movie?.imdb_id"
-          class="text-[#318FE7] underline"
-          >Link</a
-        >
-        <p v-else>_</p>
+        <SkeletonComponent
+          width="2rem"
+          height="1rem"
+          radius="0.1rem"
+          color="#E2E2E2"
+          v-if="loading"
+        />
+        <div v-else>
+          <a
+            :href="`https://www.imdb.com/title/${movie?.imdb_id}`"
+            v-if="movie?.imdb_id"
+            class="text-[#318FE7] underline"
+            >Link</a
+          >
+          <p v-else>_</p>
+        </div>
       </div>
       <!-- home page link -->
       <div class="flex justify-between py-[9px]">
         <p class="font-[700]">Homepage Link</p>
-        <a
-          :href="movie.homepage"
-          v-if="movie?.homepage"
-          class="text-[#318FE7] underline"
-          >Link</a
-        >
-        <p v-else>_</p>
+        <SkeletonComponent
+          width="2rem"
+          height="1rem"
+          radius="0.1rem"
+          color="#E2E2E2"
+          v-if="loading"
+        />
+        <div v-else>
+          <a
+            :href="movie.homepage"
+            v-if="movie?.homepage"
+            class="text-[#318FE7] underline"
+            >Link</a
+          >
+          <p v-else>_</p>
+        </div>
       </div>
     </div>
   </div>
@@ -100,15 +168,20 @@ import { ISingleMovie } from "@/interfaces/movies";
 import { IMAGE_URL } from "@/statics";
 import { defineComponent, PropType } from "vue";
 import StarRating from "vue-star-rating";
+import SkeletonComponent from "@/components/Skeleton/SkeletonComponent.vue";
 
 export default defineComponent({
   name: "MovieBodyComponent",
   components: {
     StarRating,
+    SkeletonComponent,
   },
   props: {
     movie: {
       type: Object as PropType<ISingleMovie>,
+    },
+    loading: {
+      type: Boolean,
     },
   },
   data() {
