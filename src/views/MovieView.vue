@@ -76,6 +76,7 @@ export default defineComponent({
           text: error,
         });
         this.loading = false;
+        this.$router.push("/");
       }
     },
     // get movie credits

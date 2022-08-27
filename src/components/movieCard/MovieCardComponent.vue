@@ -127,7 +127,7 @@ export default defineComponent({
   },
   methods: {
     navigateToMovie(id: string) {
-      this.$router.push(`/${id}`);
+      this.$router.push(`movie/${id}`);
     },
   },
 });

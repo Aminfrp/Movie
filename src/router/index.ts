@@ -9,9 +9,13 @@ const routes: Array<RouteRecordRaw> = [
     component: MoviesView,
   },
   {
-    path: "/:id",
+    path: "/movie/:id",
     name: "movie",
     component: MovieView,
+  },
+  {
+    path: "/:catchAll(.*)",
+    redirect: "/",
   },
 ];
 
